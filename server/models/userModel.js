@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLenght: 8,
+        trim:true
     },
     phone: String,
     profilePic: {
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema({
     },
     course: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "Course",
         },
     ],
