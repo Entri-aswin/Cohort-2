@@ -22,7 +22,7 @@ const courseSchema = new mongoose.Schema({
     syllabus: String,
     price: Number,
     mentor: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Mentor",
     },
 });

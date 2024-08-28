@@ -1,9 +1,9 @@
 const express = require("express");
+const { createCourse } = require("../../controller/courseController");
+const { upload } = require("../../middlewares/multer");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-    res.send("accessed course route get method");
-});
+router.post("/create", upload.single("image"), createCourse);
 
 module.exports = { courseRouter: router };

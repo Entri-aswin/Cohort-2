@@ -26,7 +26,7 @@ const userSignup = async (req, res, next) => {
         res.json({ success: true, message: "user created successfully" });
     } catch (error) {
         console.log(error);
-        res.status(error.statusCode || 500).json({ message: error.message || "Internal server error" });
+        next(error);
     }
 };
 
@@ -53,7 +53,7 @@ const userLogin = async (req, res, next) => {
         res.json({ success: true, message: "user login successfull" });
     } catch (error) {
         console.log(error);
-        res.status(error.statusCode || 500).json({ message: error.message || "Internal server error" });
+        next(error);
     }
 };
 
@@ -63,7 +63,7 @@ const userLogout = async (req, res, next) => {
         res.json({ message: "user logout success", success: true });
     } catch (error) {
         console.log(error);
-        res.status(error.statusCode || 500).json({ message: error.message || "Internal server error" });
+        next(error)
     }
 };
 const userProfile = async (req, res, next) => {
@@ -82,9 +82,9 @@ const userProfile = async (req, res, next) => {
 
 const checkUser = async (req, res, next) => {
     try {
-        const {user}=req;
-        if(!user){
-            res.status(401).json({success:false,message:'user not autherized'})
+        const { user } = req;
+        if (!user) {
+            res.status(401).json({ success: false, message: "user not autherized" });
         }
 
         res.json({ success: true, message: "user autherized" });
@@ -94,4 +94,4 @@ const checkUser = async (req, res, next) => {
     }
 };
 
-module.exports = { userSignup, userLogin, userLogout, userProfile , checkUser };
+module.exports = { userSignup, userLogin, userLogout, userProfile, checkUser };
