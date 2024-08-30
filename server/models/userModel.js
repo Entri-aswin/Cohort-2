@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt_NZykul07nU3cliFuRZQr4_q-gOdkRTmRA&s",
     },
+    address:{
+        houseNo:String,
+        street:String,
+        pin:String,
+        state:String
+    },
     course: [
         {
             type: mongoose.Schema.Types.ObjectId,

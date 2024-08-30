@@ -15,4 +15,6 @@ router.delete("/delete");
 router.get("/userList");
 // router.get("/check-mentor", );
 
+// router.get("/some-end-point", adminAuth, handleSomething);
+
 module.exports = { mentorRouter: router };
