@@ -5,7 +5,7 @@ const { mentorAuth } = require("../../middlewares/mentorAuth");
 const { userAuth } = require("../../middlewares/userAuth");
 
 const router = express.Router();
-router.get("/course-list", userAuth, getCourses);
+router.get("/course-list",  getCourses);
 router.post("/create", mentorAuth, upload.single("image"), createCourse);
 router.put("/update/:courseId", mentorAuth, upload.single("image"), updateCourse);
 router.delete("/delete/:courseId", mentorAuth, deleteCourse);
