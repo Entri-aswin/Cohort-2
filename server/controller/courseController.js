@@ -68,10 +68,20 @@ const deleteCourse = async (req, res, next) => {
 
         if (!courseDeleted) res.status(400).json({ success: true, message: "course already deleted" });
 
-        res.status(200).json({ success: true, message: "course updated successfully", data: courseDeleted });
+        res.status(200).json({ success: true, message: "course deleted successfully", data: courseDeleted });
+    } catch (error) {
+        next(error);
+    }
+};
+const getCourses = async (req, res, next) => {
+    try {
+
+        const courses = await Course.find();
+
+        res.status(200).json({ success: true, message: "courses fetched", data: courses });
     } catch (error) {
         next(error);
     }
 };
 
-module.exports = { createCourse, updateCourse ,deleteCourse };
+module.exports = { createCourse, updateCourse ,deleteCourse,getCourses };

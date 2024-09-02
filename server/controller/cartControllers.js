@@ -41,29 +41,6 @@ const addToCart = async (req, res) => {
     }
 };
 
-const updateCart = async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const { courseId } = req.body;
-
-        // Find the course to ensure it exists and fetch its price
-        const course = await Course.findById(courseId);
-        if (!course) {
-            return res.status(404).json({ message: "Course not found" });
-        }
-
-        const cart = await Cart.findByIdAndUpdate({ _id: userId }, { $push: { courses: { courseId, price: course.price } } });
-
-        // Recalculate the total price
-        cart.calculateTotalPrice();
-
-        await cart.save();
-
-        res.status(200).json(cart);
-    } catch (error) {
-        res.status(500).json({ message: "Internal server error", error });
-    }
-};
 
 const removeFromCart = async (req, res) => {
     try {
@@ -77,16 +54,14 @@ const removeFromCart = async (req, res) => {
         }
 
         // Remove the course from the cart
-        // cart.courses = cart.courses.filter((item) => item.courseId !== courseId);
+        cart.courses = cart.courses.filter((item) => item.courseId != courseId);
 
-        // // Recalculate the total price
-        // cart.calculateTotalPrice();
+        // Recalculate the total price
+        cart.calculateTotalPrice();
 
-        // // Save the cart
-        // await cart.save();
+        // Save the cart
+        await cart.save();
 
-        Cart.findByIdAndUpdate({ userId }, { $pull: { courses: courseId } });
-        console.log(cart, "=====cart updated");
 
         res.status(200).json({ success: true, message: "cart item removed", data: cart });
     } catch (error) {
@@ -109,4 +84,4 @@ const getCart = async (req, res) => {
     }
 };
 
-module.exports = { addToCart, removeFromCart, getCart, updateCart };
+module.exports = { addToCart, removeFromCart, getCart };

@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 
 const userAuth = (req, res, next) => {
     try {
+        console.log('hitted');
+        
         const { token } = req.cookies;
         if (!token) {
             return res.status(401).json({ success: false, message: "user not autherized" });
