@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 export const Footer = () => {
     return (
@@ -22,6 +23,7 @@ export const Footer = () => {
                 <a className="link link-hover">Terms of use</a>
                 <a className="link link-hover">Privacy policy</a>
                 <a className="link link-hover">Cookie policy</a>
+                <Link to={'/mentor-signup'} >Login as a mentor</Link>
             </nav>
             <form>
                 <h6 className="footer-title">Newsletter</h6>

@@ -6,6 +6,9 @@ import { LoginPage } from "../pages/LoginPage";
 import { SIgnupPage } from "../pages/SIgnupPage";
 import { CoursePage } from "../pages/CoursePage";
 import { CourseDetails } from "../pages/CourseDetails";
+import { UserLayout } from "../layout/UserLayout";
+import { AuthUser } from "./protectedRoutes/AuthUser";
+import { ProfilePage } from "../pages/user/ProfilePage";
 
 export const router = createBrowserRouter([
     {
@@ -33,8 +36,47 @@ export const router = createBrowserRouter([
                 element: <CoursePage />,
             },
             {
-                path: "course-details",
+                path: "course-details/:id",
                 element: <CourseDetails />,
+            },
+        ],
+    },
+    {
+        path: "user",
+        element: (
+            <AuthUser>
+                <UserLayout />
+            </AuthUser>
+        ),
+        children: [
+            {
+                path: "profile",
+                element: <ProfilePage />,
+            },
+            {
+                path: "my-learnings",
+                element: <h1>My learnings</h1>,
+            },
+        ],
+    },
+    {
+        path: "mentor-signup",
+        element: <h2>Mentor signup </h2>
+    },
+    {
+        path:'mentor-login',
+
+    },
+
+    {
+        path: "mentor",
+        // element: ,
+        children: [
+            {
+                path: "dashboard",
+            },
+            {
+                path: "create-course",
             },
         ],
     },

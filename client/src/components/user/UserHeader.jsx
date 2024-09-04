@@ -1,8 +1,9 @@
 import React from "react";
+import { CircleUser } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
-import { DarkMode } from "./ui/DarkMode";
 
-export const Header = () => {
+export const UserHeader = () => {
     return (
         <div className="flex justify-between items-center w-full px-20  h-24 shadow-2xl  ">
             <Link to={"/"}>
@@ -14,9 +15,13 @@ export const Header = () => {
                 <Link to={"/course"}>Course</Link>
             </nav>
 
-            <div>
-                <DarkMode />
-                <button className="btn btn-primary">Join us</button>
+            <div className="flex gap-14 ">
+                <Link>
+                    <ShoppingBag />
+                </Link>
+                <Link to={'/user/profile'}>
+                    <CircleUser />
+                </Link>
             </div>
         </div>
     );

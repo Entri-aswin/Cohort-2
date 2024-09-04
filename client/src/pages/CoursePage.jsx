@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
+import { CourseCard } from "../components/Cards";
 
 export const CoursePage = () => {
     const [data, setData] = useState([]);
 
-    console.log(data,'=======data');
-    
+    console.log(data, "=======data");
 
     const fetchCourses = async () => {
         try {
@@ -13,7 +13,7 @@ export const CoursePage = () => {
                 method: "GET",
                 url: "/course/course-list",
             });
-            setData(response?.data?.data)
+            setData(response?.data?.data);
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -28,8 +28,9 @@ export const CoursePage = () => {
         <div>
             <h1>Course list</h1>
 
-
-
+            {data.map((value) => (
+                <CourseCard course={value} key={value?._id} />
+            ))}
         </div>
     );
 };

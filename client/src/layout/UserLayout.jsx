@@ -4,10 +4,10 @@ import { Footer } from "../components/Footer";
 import { Outlet } from "react-router-dom";
 import { UserHeader } from "../components/user/UserHeader";
 
-export const RootLayout = () => {
+export const UserLayout = () => {
     return (
         <div>
-            <Header />
+            <UserHeader />
             <div className="min-h-96">
                 <Outlet />
             </div>

@@ -75,13 +75,23 @@ const deleteCourse = async (req, res, next) => {
 };
 const getCourses = async (req, res, next) => {
     try {
-
-        const courses = await Course.find();
+        const courses = await Course.find().select("-syllabus");
 
         res.status(200).json({ success: true, message: "courses fetched", data: courses });
     } catch (error) {
         next(error);
     }
 };
+const getCourseDetails = async (req, res, next) => {
+    try {
+        const { courseId } = req.params;
 
-module.exports = { createCourse, updateCourse ,deleteCourse,getCourses };
+        const courseDetails = await Course.findById(courseId).populate("mentor");
+
+        res.status(200).json({ success: true, message: "courses fetched", data: courseDetails });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { createCourse, updateCourse, deleteCourse, getCourses, getCourseDetails };
