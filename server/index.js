@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin: "http://localhost:5100",
+        origin: ["http://localhost:5100", "https://elearning-app-phi.vercel.app"],
         credentials: true,
     })
 );
