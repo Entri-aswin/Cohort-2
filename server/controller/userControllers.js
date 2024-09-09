@@ -22,7 +22,12 @@ const userSignup = async (req, res, next) => {
 
         const token = generateToken(newUser._id);
 
-        res.cookie("token", token);
+        res.cookie("token", token, {
+            sameSite: "None",
+            secure: true,
+            httpOnly: true,
+        });
+
         res.json({ success: true, message: "user created successfully" });
     } catch (error) {
         console.log(error);
@@ -49,7 +54,11 @@ const userLogin = async (req, res, next) => {
 
         const token = generateToken(userExist._id);
 
-        res.cookie("token", token);
+        res.cookie("token", token, {
+            sameSite: "None",
+            secure: true,
+            httpOnly: true,
+        });
         res.json({ success: true, message: "user login successfull" });
     } catch (error) {
         console.log(error);
@@ -59,11 +68,18 @@ const userLogin = async (req, res, next) => {
 
 const userLogout = async (req, res, next) => {
     try {
-        res.clearCookie("token");
+        res.clearCookie("token", {
+            sameSite: "None",
+            secure: true,
+            httpOnly: true,
+        });
+
+        
         res.json({ message: "user logout success", success: true });
     } catch (error) {
         console.log(error);
-        next(error)
+        next(error);
+        F;
     }
 };
 const userProfile = async (req, res, next) => {
