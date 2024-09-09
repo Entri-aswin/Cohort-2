@@ -79,18 +79,18 @@ const mentorProfile = async (req, res, next) => {
     }
 };
 
-const checkUser = async (req, res, next) => {
+const checkMentor = async (req, res, next) => {
     try {
         const { user } = req;
         if (!user) {
             res.status(401).json({ success: false, message: "user not autherized" });
         }
 
-        res.json({ success: true, message: "user autherized" });
+        res.json({ success: true, message: "mentor autherized" });
     } catch (error) {
         console.log(error);
         res.status(error.statusCode || 500).json({ message: error.message || "Internal server error" });
     }
 };
 
-module.exports = { mentorSignup, mentorLogin , mentorLogout, mentorProfile};
+module.exports = { mentorSignup, mentorLogin , mentorLogout, mentorProfile, checkMentor};

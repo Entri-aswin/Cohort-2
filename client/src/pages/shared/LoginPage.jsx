@@ -1,19 +1,33 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { axiosInstance } from "../config/axiosInstance";
+import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
 
-export const LoginPage = () => {
+export const LoginPage = ({ role = "user" }) => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
+    const user = {
+        role: "user",
+        login_api: "/user/login",
+        profile_route: "/user/profile",
+        signup_route: "/signup",
+    };
+
+    if (role === "mentor") {
+        user.role = "mentor";
+        (user.login_api = "/mentor/login"), (user.profile_route = "/mentor/profile"), (user.signup_route = "/mentor/signup");
+    }
+
+    console.log(user, "=====user");
+
     const onSubmit = async (data) => {
         try {
-            const response = await axiosInstance({ method: "POST", url: "/user/login", data });
+            const response = await axiosInstance({ method: "POST", url: user.login_api, data });
             console.log(response, "====response");
             toast.success("Log-in success");
-            navigate("/user/profile");
+            navigate(user.profile_route);
         } catch (error) {
             toast.error("Log-in failed");
             console.log(error);
@@ -24,7 +38,7 @@ export const LoginPage = () => {
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
+                    <h1 className="text-5xl font-bold">Login now! {role} </h1>
                     <p className="py-6">
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque
                         aut repudiandae et a id nisi.
@@ -50,7 +64,7 @@ export const LoginPage = () => {
                                 required
                             />
                             <label className="label">
-                                <Link to={"/signup"}>new User ?</Link>
+                                <Link to={user.signup_route}>new User ?</Link>
                             </label>
                         </div>
                         <div className="form-control mt-6">

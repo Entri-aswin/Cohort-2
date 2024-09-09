@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom'
 
-export const Footer = () => {
+export const MentorFooter = () => {
     return (
         <footer className="footer bg-base-200 text-base-content p-10">
             <nav>
@@ -23,7 +23,7 @@ export const Footer = () => {
                 <a className="link link-hover">Terms of use</a>
                 <a className="link link-hover">Privacy policy</a>
                 <a className="link link-hover">Cookie policy</a>
-                <Link to={'/mentor/login'} >Login as a mentor</Link>
+                
             </nav>
             <form>
                 <h6 className="footer-title">Newsletter</h6>

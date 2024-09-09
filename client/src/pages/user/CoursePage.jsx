@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { axiosInstance } from "../config/axiosInstance";
-import { CourseCard } from "../components/Cards";
-import { useCourses } from "../hooks/useCourses";
-import { Skeltons } from "../components/ui/Skeltons";
+import { Skeltons } from "../../components/ui/Skeltons";
+// import { CourseCard } from "../../components/Cards";
+import { useCourses } from "../../hooks/useCourses";
+import { CourseCard } from "../../components/Cards";
 
 export const CoursePage = () => {
     const [data, error, loading] = useCourses();
@@ -18,7 +18,7 @@ export const CoursePage = () => {
 
                 ))
             ) : (
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-1 md:grid-cols-2">
                     {data.map((value) => (
                         <CourseCard course={value} key={value?._id} />
                     ))}

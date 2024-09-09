@@ -26,6 +26,7 @@ export const UserLayout = () => {
         }
     };
 
+
     useEffect(() => {
         checkUser();
     }, [location.pathname]);

@@ -1,19 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home } from "../pages/Home";
-import { About } from "../pages/About";
-import { LoginPage } from "../pages/LoginPage";
-import { SIgnupPage } from "../pages/SIgnupPage";
-import { CoursePage } from "../pages/CoursePage";
-import { CourseDetails } from "../pages/CourseDetails";
+// import { Home } from "../pages/Home";
+// import { About } from "../pages/About";
+import { LoginPage } from "../pages/shared/LoginPage";
+import { SIgnupPage } from "../pages/shared/SIgnupPage";
+// import { CoursePage } from "../pages/CoursePage";
+// import { CourseDetails } from "../pages/CourseDetails";
 import { UserLayout } from "../layout/UserLayout";
 import { AuthUser } from "./protectedRoutes/AuthUser";
 import { ProfilePage } from "../pages/user/ProfilePage";
-import { ErrorPage } from "../pages/ErrorPage";
+// import { ErrorPage } from "../pages/ErrorPage";
 import { CartPage } from "../pages/user/CartPage";
+import { Home } from "../pages/user/Home";
+import { About } from "../pages/user/About";
+import { CoursePage } from "../pages/user/CoursePage";
+import { CourseDetails } from "../pages/user/CourseDetails";
+import { ErrorPage } from "../pages/user/ErrorPage";
+import { MentorLayout } from "../layout/MentorLayout";
+import { CreateCourse } from "../pages/mentor/CreateCourse";
 
 export const router = createBrowserRouter([
     {
-        path: "/",
+        path: "",
         element: <UserLayout />,
         errorElement: <ErrorPage />,
         children: [
@@ -63,22 +70,31 @@ export const router = createBrowserRouter([
     },
 
     {
-        path: "mentor-signup",
-        element: <h2>Mentor signup </h2>,
-    },
-    {
-        path: "mentor-login",
-    },
-
-    {
         path: "mentor",
-        // element: ,
+        element: <MentorLayout />,
         children: [
             {
-                path: "dashboard",
+                path: "signup",
+                element: <h2>Mentor signup </h2>,
             },
             {
-                path: "create-course",
+                path: "login",
+                element: <LoginPage role="mentor" />,
+            },
+
+            {
+                path: "",
+                // element: ,
+                children: [
+                    {
+                        path: "profile",
+                        element: <h1>Mentor profile</h1>,
+                    },
+                    {
+                        path: "create-course",
+                        element: <CreateCourse />,
+                    },
+                ],
             },
         ],
     },

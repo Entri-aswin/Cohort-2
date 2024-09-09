@@ -39,6 +39,8 @@ const updateCourse = async (req, res, next) => {
         const { title, description, duration, price, mentor } = req.body;
         let imageUrl;
 
+        // req.file
+
         const isCourseExist = await Course.findOne({ _id: courseId });
 
         if (!isCourseExist) {
@@ -51,7 +53,7 @@ const updateCourse = async (req, res, next) => {
 
         const updatedCourse = await Course.findOneAndUpdate(
             { _id: courseId },
-            { title, description, duration, price, mentor },
+            { title, description, duration, price, mentor, image: imageUrl },
             { new: true }
         );
 

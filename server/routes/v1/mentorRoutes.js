@@ -1,5 +1,5 @@
 const express = require("express");
-const { mentorSignup, mentorLogout, mentorLogin, mentorProfile } = require("../../controller/mentorControllers");
+const { mentorSignup, mentorLogout, mentorLogin, mentorProfile, checkMentor } = require("../../controller/mentorControllers");
 const { mentorAuth } = require("../../middlewares/mentorAuth");
 
 const router = express.Router();
@@ -13,7 +13,7 @@ router.put("/update");
 router.delete("/delete");
 
 router.get("/userList");
-// router.get("/check-mentor", );
+router.get("/check-mentor", mentorAuth, checkMentor );
 
 // router.get("/some-end-point", adminAuth, handleSomething);
 
