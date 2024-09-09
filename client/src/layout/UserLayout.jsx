@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { UserHeader } from "../components/user/UserHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosInstance } from "../config/axiosInstance";
 import { clearUser, saveUser } from "../redux/features/userSlice";
 
 export const UserLayout = () => {
-    // const [isUserExist, setUserExist] = useState(true);
-
     const { isUserExist } = useSelector((state) => state.user);
     const dispatch = useDispatch();
-
-    const navigate = useNavigate();
+    const location = useLocation();
 
     const checkUser = async () => {
         try {
@@ -26,14 +23,12 @@ export const UserLayout = () => {
         } catch (error) {
             dispatch(clearUser());
             console.log(error);
-            navigate("/login");
         }
     };
 
     useEffect(() => {
         checkUser();
-    }, []);
-    
+    }, [location.pathname]);
 
     return (
         <div>
