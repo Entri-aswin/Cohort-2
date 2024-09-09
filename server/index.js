@@ -13,6 +13,8 @@ app.use(
     cors({
         origin: ["http://localhost:5100", "https://elearning-app-phi.vercel.app"],
         credentials: true,
+        methods :['POST','GET',"PUT","DELETE","OPTION"],
+        
     })
 );
 
