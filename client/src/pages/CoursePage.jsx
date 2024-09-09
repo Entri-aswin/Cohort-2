@@ -1,36 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
 import { CourseCard } from "../components/Cards";
+import { useCourses } from "../hooks/useCourses";
+import { Skeltons } from "../components/ui/Skeltons";
 
 export const CoursePage = () => {
-    const [data, setData] = useState([]);
+    const [data, error, loading] = useCourses();
 
-    console.log(data, "=======data");
-
-    const fetchCourses = async () => {
-        try {
-            const response = await axiosInstance({
-                method: "GET",
-                url: "/course/course-list",
-            });
-            setData(response?.data?.data);
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        fetchCourses();
-    }, []);
 
     return (
         <div>
             <h1>Course list</h1>
 
-            {data.map((value) => (
-                <CourseCard course={value} key={value?._id} />
-            ))}
+            {loading ? (
+                Array(10).fill({}).map((value,index)=>(
+                    <Skeltons key={index} />
+
+                ))
+            ) : (
+                <div className="grid grid-cols-3">
+                    {data.map((value) => (
+                        <CourseCard course={value} key={value?._id} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

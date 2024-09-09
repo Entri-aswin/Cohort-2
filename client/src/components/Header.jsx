@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DarkMode } from "./ui/DarkMode";
 
 export const Header = () => {
+
+    const navigate =useNavigate()
+
     return (
         <div className="flex justify-between items-center w-full px-20  h-24 shadow-2xl  ">
             <Link to={"/"}>
@@ -14,9 +17,9 @@ export const Header = () => {
                 <Link to={"/course"}>Course</Link>
             </nav>
 
-            <div>
+            <div className="flex items-center gap-10">
                 <DarkMode />
-                <button className="btn btn-primary">Join us</button>
+                <button onClick={()=>navigate('/signup')} className="btn btn-primary">Join us</button>
             </div>
         </div>
     );

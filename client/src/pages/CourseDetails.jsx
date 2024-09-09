@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../config/axiosInstance";
+import toast from "react-hot-toast";
 
 export const CourseDetails = () => {
     const [CourseDetails, setCourseDetails] = useState({});
@@ -22,6 +23,22 @@ export const CourseDetails = () => {
         }
     };
 
+    const addToCart = async () => {
+        try {
+            const response = await axiosInstance({
+                url: "/cart/add-to-cart",
+                method: "POST",
+                data: { courseId: CourseDetails._id },
+            });
+            console.log(response);
+            toast.success('course added to cart')
+            
+        } catch (error) {
+            toast.error('item could not add to cart')
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         fetchCourseDetails();
     }, []);
@@ -35,6 +52,8 @@ export const CourseDetails = () => {
                     <h1>{CourseDetails?.description} </h1>
                     <h1>{CourseDetails?.price} </h1>
                     <h1>{CourseDetails?.duration} </h1>
+
+                    <button className="btn btn-success" onClick={addToCart}>ADD to Cart</button>
                 </div>
                 <div className="w-5/12">
                     <img src={CourseDetails?.image} alt="" />

@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const DarkMode = () => {
+    const [isDarkMode, setIsDarkMode] = useState(true);
 
+    document.querySelector("html").setAttribute("data-theme", isDarkMode ? "light" : "dark");
 
-    document.querySelector('html').setAttribute('data-theme','')
-    const toggleTheme = ()=>{
-
-    }
-
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
 
     return (
         <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
-            <input type="checkbox" />
+            <input type="checkbox" onClick={toggleTheme} />
 
             {/* sun icon */}
             <svg className="swap-on h-10 w-10 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

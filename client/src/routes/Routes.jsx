@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "../pages/Home";
-import { RootLayout } from "../layout/RootLayout";
 import { About } from "../pages/About";
 import { LoginPage } from "../pages/LoginPage";
 import { SIgnupPage } from "../pages/SIgnupPage";
@@ -9,11 +8,14 @@ import { CourseDetails } from "../pages/CourseDetails";
 import { UserLayout } from "../layout/UserLayout";
 import { AuthUser } from "./protectedRoutes/AuthUser";
 import { ProfilePage } from "../pages/user/ProfilePage";
+import { ErrorPage } from "../pages/ErrorPage";
+import { CartPage } from "../pages/user/CartPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <RootLayout />,
+        element: <UserLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "",
@@ -39,33 +41,33 @@ export const router = createBrowserRouter([
                 path: "course-details/:id",
                 element: <CourseDetails />,
             },
+            {
+                path: "user",
+                element: <AuthUser />,
+                children: [
+                    {
+                        path: "profile",
+                        element: <ProfilePage />,
+                    },
+                    {
+                        path: "my-learnings",
+                        element: <h1>My learnings</h1>,
+                    },
+                    {
+                        path: "cart",
+                        element: <CartPage />,
+                    },
+                ],
+            },
         ],
     },
-    {
-        path: "user",
-        element: (
-            <AuthUser>
-                <UserLayout />
-            </AuthUser>
-        ),
-        children: [
-            {
-                path: "profile",
-                element: <ProfilePage />,
-            },
-            {
-                path: "my-learnings",
-                element: <h1>My learnings</h1>,
-            },
-        ],
-    },
+
     {
         path: "mentor-signup",
-        element: <h2>Mentor signup </h2>
+        element: <h2>Mentor signup </h2>,
     },
     {
-        path:'mentor-login',
-
+        path: "mentor-login",
     },
 
     {
