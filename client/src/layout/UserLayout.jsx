@@ -11,6 +11,7 @@ export const UserLayout = () => {
     const { isUserExist } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const location = useLocation();
+    const [loading, setLoading] = useState(true);
 
     const checkUser = async () => {
         try {
@@ -19,19 +20,18 @@ export const UserLayout = () => {
                 url: "/user/check-user",
             });
             dispatch(saveUser());
-            console.log(response);
+            setLoading(false);
         } catch (error) {
             dispatch(clearUser());
             console.log(error);
         }
     };
 
-
     useEffect(() => {
         checkUser();
     }, [location.pathname]);
 
-    return (
+    return loading ? null : (
         <div>
             {isUserExist ? <UserHeader /> : <Header />}
             <div className="min-h-96">

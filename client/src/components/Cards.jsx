@@ -21,7 +21,6 @@ export const CourseCard = ({ course }) => {
 };
 
 export const CartCards = ({ item, product }) => {
-    console.log(item);
 
     return (
         <div className="flex w-full h-32 items-center gap-20 bg-base-300 mb-10 rounded-md ">

@@ -64,6 +64,14 @@ export const router = createBrowserRouter([
                         path: "cart",
                         element: <CartPage />,
                     },
+                    {
+                        path: "payment/success",
+                        element: <h2>Payment success</h2>,
+                    },
+                    {
+                        path: "payment/cancel",
+                        element: <h2>Payment cancel</h2>,
+                    },
                 ],
             },
         ],
