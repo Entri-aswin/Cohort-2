@@ -24,6 +24,8 @@ export const UserLayout = () => {
         } catch (error) {
             dispatch(clearUser());
             console.log(error);
+        }finally{
+            setLoading(false)
         }
     };
 
